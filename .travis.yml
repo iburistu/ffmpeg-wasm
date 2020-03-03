@@ -2,9 +2,9 @@ sudo: required
 services:
   - docker
 script:
+  - docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
   - docker build -t ffmpeg-wasm .
 after_success:
-  - docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
   - docker tag ffmpeg-wasm $DOCKER_ID/ffmpeg-wasm:$TRAVIS_BUILD_NUMBER
   - docker tag ffmpeg-wasm $DOCKER_ID/ffmpeg-wasm:latest
   - docker push ffmpeg-wasm $DOCKER_ID/ffmpeg-wasm:$TRAVIS_BUILD_NUMBER
