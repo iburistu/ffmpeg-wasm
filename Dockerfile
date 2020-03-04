@@ -76,9 +76,9 @@ RUN wget https://raw.githubusercontent.com/bgrins/videoconverter.js/master/build
     && wget https://raw.githubusercontent.com/bgrins/videoconverter.js/master/build/ffmpeg_post.js \
     && emcc -s TOTAL_MEMORY=33554432 -O3 -v ffmpeg.bc libx264.bc libvpx.bc -o ffmpeg.js --pre-js ffmpeg_pre.js --post-js ffmpeg_post.js
 
-#FROM ubuntu:latest
+FROM ubuntu:latest
 
-#COPY --from=builder /src/dist/ ~/dist/
+COPY --from=builder /src/dist/ /usr/local/bin/ffmpeg-wasm
 
 LABEL maintainer="zack@linkletter.dev" \
       org.label-schema.name="ffmpeg-wasm" \
